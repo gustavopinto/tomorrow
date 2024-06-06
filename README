@@ -1,6 +1,6 @@
 ## Curso tomorrow 
 
-Passo a passo para criar nosso hello world
+Passo a passo para criar nosso hello world:
 
 ```
 mkdir tomorrow 
@@ -17,3 +17,13 @@ pip install langchain langchain-huggingface langchain_community
 - se cadastre e gere um token: https://huggingface.co/ 
 - lembre-se de marcar os itens "Make calls to the serverless Inference API" e "Make calls to Inference Endpoints"
 
+
+### Modelos úteis 
+
+- google/gemma-2b 
+- mistralai/Mixtral-8x7B-Instruct-v0.1
+- mistralai/Mistral-7B-Instruct-v0.2
+- mistralai/Mistral-7B-Instruct-v0.3
+- microsoft/Phi-3-mini-4k-instruct também
+- meta-llama/Meta-Llama-3-8B-Instruct
+- meta-llama/Meta-Llama-3-70B-Instruct
