@@ -1,0 +1,19 @@
+## Curso tomorrow 
+
+Passo a passo para criar nosso hello world
+
+```
+mkdir tomorrow 
+cd tomorrow 
+
+python3 -m venv env
+source env/bin/activate
+
+pip install langchain langchain-huggingface langchain_community
+```
+
+### Crie um token no huggingface
+
+- se cadastre e gere um token: https://huggingface.co/ 
+- lembre-se de marcar os itens "Make calls to the serverless Inference API" e "Make calls to Inference Endpoints"
+
