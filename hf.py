@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = "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"
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = os.getenv("HG")
 
 model = HuggingFaceEndpoint(repo_id="microsoft/Phi-3-mini-128k-instruct", task="text-generation", temperature=0.9)
 
