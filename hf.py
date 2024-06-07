@@ -1,17 +1,12 @@
 from langchain_community.llms import HuggingFaceEndpoint
 import os
+from dotenv import load_dotenv
 
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = "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"
+load_dotenv()
 
-model = HuggingFaceEndpoint(repo_id="meta-llama/Meta-Llama-3-8B-Instruct", task="text-generation", temperature=0.9)
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = "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"
 
-r = model.invoke("""<|begin_of_text|>
-
-    <|start_header_id|>system<|end_header_id|>
-    me conte uma piada sobre o tacaca.
-    <|eot_id|>
-             
-    <|start_header_id|>assistant<|end_header_id|>""")
+model = HuggingFaceEndpoint(repo_id="microsoft/Phi-3-mini-128k-instruct", task="text-generation", temperature=0.9)
 
 history = []
 
@@ -43,4 +38,3 @@ while True:
 
     print(f"> {response}")
     print("\n")
-
