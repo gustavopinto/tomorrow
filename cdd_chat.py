@@ -1,6 +1,7 @@
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 from langchain_community.document_loaders import PyPDFLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from dotenv import load_dotenv
 import os
@@ -13,7 +14,37 @@ def get_cdd_info():
 
     return "\n".join(pages) # converto a lista de strings para uma unica string
 
-model = ChatOpenAI(openai_api_key=os.getenv('OPENAI_API_KEY'), model="gpt-4o")
+text_splitter = RecursiveCharacterTextSplitter(
+    separators=[
+        "\n\n",
+        "\n",
+        ".",
+        "!",
+        "?",
+        ";",
+        " ",
+        "",
+    ],
+    chunk_size=1000,
+    chunk_overlap=200,
+    length_function=len,
+    is_separator_regex=False,
+)
+
+docs = text_splitter.split_text(get_cdd_info())
+for doc in docs: 
+    print("->", doc)
+
+# 0. preciso experimentar com o tamanho adequado de chunks: https://huggingface.co/spaces/m-ric/chunk_visualizer
+# 1. preciso separar os dados do ruído
+# 2. tiraria as referencias
+# 3. corrigiria os hifens do textos
+# 4. removeria (ou pediria para outro modelo explicar) as tabelas
+# 5. sci-fiction (https://dl.acm.org/doi/pdf/10.1145/3616855.3635752)
+
+import sys; sys.exit(0)
+
+model = ChatOpenAI(openai_api_key=os.getenv('OPENAI_API_KEY'), model="gpt-3.5")
 
 prompt = ChatPromptTemplate.from_messages([
     ("system", "Quero que você atue como um expert em técnicas de design de código."),

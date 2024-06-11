@@ -3,3 +3,4 @@ langchain_community
 langchain-huggingface
 python-dotenv
 pypdf
+langchain-text-splitters
