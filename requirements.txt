@@ -4,3 +4,4 @@ langchain-huggingface
 python-dotenv
 pypdf
 langchain-text-splitters
+sentence-transformers
