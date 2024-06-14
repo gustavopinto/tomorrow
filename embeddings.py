@@ -13,7 +13,7 @@ chunks = ["pizza", # imagine que essa lista é um banco de dados
 
 embeddings = model.encode(chunks)
 
-user_query = "what kind of food I eat in Italy?"
+user_query = "what kind of food I eat in Italy?" # imagine que essa é uma consulta do usuário
 query = model.encode([user_query])
 
 
@@ -25,3 +25,5 @@ for i in range(len(embeddings)):
 # 1. os embeddings tem sempre o mesmo tamanho
 # 2. os valores dos embeddings são deterministicos
 # 3. nao é somente criar os embeddings, devo tambem testar o vocabulario
+# 4. embeddings criados por modelos diferentes não podem ser comparados (por similaridade)
+# 5. para saber mais: https://huggingface.co/spaces/mteb/leaderboard
