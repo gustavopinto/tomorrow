@@ -7,33 +7,33 @@ from dotenv import load_dotenv
 import os
 load_dotenv()
 
-def get_cdd_info():
-    loader = PyPDFLoader("https://arxiv.org/pdf/2210.07342")
+def get_cdd_info(pdf):
+    """vai me devolver uma lista de chunks em str"""
+
+    loader = PyPDFLoader(pdf)
     pages = loader.load() # devolve um Document, envelopando a string
     pages =  [page.page_content for page in pages] # tiro a string de dentro do document
 
-    return "\n".join(pages) # converto a lista de strings para uma unica string
+    text_splitter = RecursiveCharacterTextSplitter(
+        separators=[
+            "\n\n",
+            "\n",
+            ".",
+            "!",
+            "?",
+            ";",
+            " ",
+            "",
+        ],
+        chunk_size=1000,
+        chunk_overlap=200,
+        length_function=len,
+        is_separator_regex=False,
+    )
 
-text_splitter = RecursiveCharacterTextSplitter(
-    separators=[
-        "\n\n",
-        "\n",
-        ".",
-        "!",
-        "?",
-        ";",
-        " ",
-        "",
-    ],
-    chunk_size=1000,
-    chunk_overlap=200,
-    length_function=len,
-    is_separator_regex=False,
-)
+    chunks = text_splitter.split_text("\n".join(pages))
+    return chunks
 
-docs = text_splitter.split_text(get_cdd_info())
-for doc in docs: 
-    print("->", doc)
 
 # 0. preciso experimentar com o tamanho adequado de chunks: https://huggingface.co/spaces/m-ric/chunk_visualizer
 # 1. preciso separar os dados do ruído
