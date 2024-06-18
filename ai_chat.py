@@ -8,7 +8,7 @@ def select_similar_chunks(user_query):
     client = chromadb.PersistentClient(path="./tomorrow")
     col = client.get_or_create_collection("langchain", 
                                         embedding_function=OpenAIEmbeddingFunction(api_key=os.getenv('OPENAI_API_KEY')))
-    results =  col.query(query_texts=[user_query], n_results=10)
+    results =  col.query(query_texts=[user_query], n_results=25)
     return "\n".join(results['documents'][0])
 
 def prompt_llm(user_query, chunks):
